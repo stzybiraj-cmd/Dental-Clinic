@@ -1,0 +1,626 @@
+/* ==========================================================================
+   [Pallavi Dental Clinic] — Dental Hospital Website
+   style.css  ·  mobile-first  ·  no frameworks
+
+   CONTENTS
+   01. Design tokens (CSS variables)
+   02. Reset & base
+   03. Layout helpers
+   04. Buttons & icons
+   05. Header / navigation
+   06. Hero
+   07. Sections, cards, grids
+   08. Why choose us
+   09. Doctors
+   10. About & stats
+   11. Before / After gallery
+   12. Testimonials carousel
+   13. FAQ accordion
+   14. Booking form
+   15. Contact & map
+   16. Footer
+   17. Floating buttons
+   18. Scroll-reveal & reduced motion
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. DESIGN TOKENS
+   Change the brand colours and radii here and the whole site follows.
+   ========================================================================== */
+:root {
+  /* Palette */
+  --primary: #087E8B;
+  --primary-dark: #066872;
+  --bg: #FFFFFF;
+  --secondary: #EAF8FA;
+  --text: #172B35;
+  --text-muted: #4D6370;           /* softer body copy, still AA contrast */
+  --border: rgba(8, 126, 139, 0.16);
+  --border-strong: rgba(8, 126, 139, 0.32);
+  --error: #B3261E;
+
+  /* Typography */
+  --font-heading: "Poppins", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale (fluid) */
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --fs-h1: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
+
+  /* Shape */
+  --r-sm: 14px;
+  --r-md: 18px;
+  --r-lg: 20px;
+
+  /* Shadows (kept very soft) */
+  --shadow-sm: 0 1px 2px rgba(23, 43, 53, 0.04), 0 4px 14px rgba(23, 43, 53, 0.05);
+  --shadow-md: 0 2px 4px rgba(23, 43, 53, 0.04), 0 14px 32px rgba(8, 126, 139, 0.12);
+
+  /* Layout */
+  --header-h: 72px;
+  --section-pad: clamp(4rem, 3rem + 5vw, 7rem);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+
+/* ==========================================================================
+   02. RESET & BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 12px); /* anchors land below sticky header */
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.6em;
+  color: var(--text);
+}
+h1 { font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.015em; }
+h3 { font-size: var(--fs-lg); }
+
+p { margin: 0 0 1em; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+dl, dd, figure, blockquote { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+
+a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--primary-dark); }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Skip link: appears when focused with the keyboard */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  padding: 0.7rem 1.1rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--r-sm);
+  transition: top 0.2s var(--ease);
+}
+.skip-link:focus { top: 1rem; color: #fff; }
+
+
+/* ==========================================================================
+   03. LAYOUT HELPERS
+   ========================================================================== */
+.container {
+  width: min(1160px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+.section { padding-block: var(--section-pad); }
+.section--tint { background: var(--secondary); }
+
+.section-head { max-width: 40rem; margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.25rem); }
+.section-head p { color: var(--text-muted); font-size: var(--fs-md); margin: 0; }
+.section-head--center { margin-inline: auto; text-align: center; }
+
+.grid { display: grid; gap: 1.25rem; }
+@media (min-width: 640px) {
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .grid { gap: 1.5rem; }
+}
+
+.lead { font-size: var(--fs-md); color: var(--text-muted); max-width: 34rem; }
+
+
+/* ==========================================================================
+   04. BUTTONS & ICONS
+   ========================================================================== */
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon--lg { width: 1.6rem; height: 1.6rem; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.4rem;
+  font-weight: 500;
+  font-size: 0.975rem;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease),
+              border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.btn--primary { background: var(--primary); color: #fff; }
+.btn--primary:hover { background: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn--primary:active { transform: translateY(0); }
+
+.btn--ghost { background: transparent; color: var(--primary); border-color: var(--border-strong); }
+.btn--ghost:hover { background: var(--secondary); color: var(--primary-dark); border-color: var(--primary); transform: translateY(-2px); }
+
+.btn--lg { padding: 1rem 1.7rem; font-size: 1rem; }
+.btn--block { width: 100%; }
+.btn[disabled] { opacity: 0.7; cursor: progress; transform: none; box-shadow: none; }
+
+/* Icon holder used on service and highlight cards */
+.icon-box {
+  display: inline-grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.25rem;
+  color: var(--primary);
+  background: var(--secondary);
+  border-radius: var(--r-sm);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.icon-box--round { border-radius: 50%; border: 1px solid var(--border); }
+.icon-box--sm { width: 2.75rem; height: 2.75rem; margin: 0; background: #fff; border: 1px solid var(--border); }
+
+
+/* ==========================================================================
+   05. HEADER / NAVIGATION
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.site-header.is-scrolled { border-bottom-color: var(--border); box-shadow: 0 6px 24px rgba(23, 43, 53, 0.05); }
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--header-h);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: auto;
+}
+.logo:hover { color: var(--text); }
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+  background: var(--primary);
+  border-radius: 12px;
+}
+.logo__mark .icon { width: 1.4rem; height: 1.4rem; }
+
+/* --- Mobile nav (default): dropdown panel under the header --- */
+.nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1.25rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 18px 30px rgba(23, 43, 53, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+}
+.nav.is-open { opacity: 1; visibility: visible; transform: none; }
+
+.nav__list { display: flex; flex-direction: column; gap: 0.15rem; }
+.nav__link {
+  display: block;
+  padding: 0.85rem 0.5rem;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s var(--ease);
+}
+.nav__link:hover, .nav__link.is-active { color: var(--primary); }
+.nav__cta-mobile { margin-top: 1rem; }
+.nav__cta-mobile .btn { width: 100%; }
+
+.header__cta { display: none; }
+
+/* Hamburger button */
+.nav-toggle {
+  display: grid;
+  place-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+}
+.nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (min-width: 640px) {
+  .header__cta { display: inline-flex; padding: 0.65rem 1.1rem; }
+}
+
+/* --- Desktop nav --- */
+@media (min-width: 960px) {
+  .nav-toggle { display: none; }
+  .nav__cta-mobile { display: none; }
+  .logo { margin-right: 0; }
+  .nav {
+    position: static;
+    margin-left: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .nav__list { flex-direction: row; gap: 0.25rem; }
+  .nav__link { padding: 0.5rem 0.8rem; border: 0; border-radius: 10px; font-size: 0.95rem; }
+  .nav__link:hover { background: var(--secondary); }
+  .nav__link.is-active { background: var(--secondary); }
+}
+
+
+/* ==========================================================================
+   06. HERO
+   ========================================================================== */
+.hero {
+  padding-block: clamp(2.5rem, 2rem + 4vw, 6rem) clamp(3.5rem, 3rem + 4vw, 6.5rem);
+  background: radial-gradient(52rem 28rem at 88% -8%, var(--secondary), transparent 65%);
+}
+.hero__grid { display: grid; gap: 3rem; align-items: center; }
+
+.hero__copy h1 { max-width: 14ch; margin-bottom: 0.5em; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin: 2rem 0 2.5rem; }
+
+/* Trust badges */
+.trust { display: grid; gap: 1rem; }
+.trust__item { display: flex; align-items: center; gap: 0.8rem; }
+.trust__icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--primary);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+.trust__item strong { display: block; font-family: var(--font-heading); font-weight: 600; line-height: 1.25; }
+.trust__item small { color: var(--text-muted); font-size: var(--fs-sm); }
+
+/* Hero visual */
+.hero__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 460px);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: visible;
+}
+/* soft concentric rings behind the tooth */
+.hero__visual::before, .hero__visual::after {
+  content: "";
+  position: absolute;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+.hero__visual::before { inset: 12%; }
+.hero__visual::after { inset: 26%; background: #fff; border-color: var(--border); }
+
+.hero__tooth { position: relative; z-index: 1; width: 44%; height: auto; overflow: visible; }
+.hero__tooth-path, .hero__tooth-shine {
+  stroke: var(--primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero__tooth-shine { opacity: 0.45; }
+
+/* The one orchestrated moment: the tooth draws itself once on load */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__tooth-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-tooth 2.2s var(--ease) 0.2s forwards;
+  }
+  .hero__tooth-shine { opacity: 0; animation: fade-in 0.6s ease 2.1s forwards; }
+  .hero__chip { opacity: 0; animation: fade-in 0.7s ease 1.6s forwards; }
+}
+@keyframes draw-tooth { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { to { opacity: 1; } }
+.hero__tooth-shine { opacity: 0.45; }
+@media (prefers-reduced-motion: no-preference) { .hero__tooth-shine { opacity: 0; } }
+
+.hero__chip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1rem;
+  color: var(--primary);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-md);
+}
+.hero__chip strong { display: block; color: var(--text); font-size: 0.9rem; line-height: 1.3; }
+.hero__chip small { color: var(--text-muted); font-size: 0.8rem; }
+.hero__chip--top { top: 8%; left: -4%; }
+.hero__chip--bottom { bottom: 8%; right: -4%; }
+
+@media (min-width: 640px) {
+  .trust { grid-template-columns: repeat(3, auto); justify-content: start; gap: 1.75rem; }
+}
+@media (min-width: 960px) {
+  .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
+}
+@media (max-width: 480px) {
+  .hero__chip--top { left: 2%; }
+  .hero__chip--bottom { right: 2%; }
+}
+
+
+/* ==========================================================================
+   07. SECTIONS, CARDS, SERVICES
+   ========================================================================== */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+
+.service { padding: 1.9rem; }
+.service h3 { margin-bottom: 0.4em; }
+.service p { margin: 0; color: var(--text-muted); }
+.service:hover .icon-box { background: var(--primary); color: #fff; }
+
+
+/* ==========================================================================
+   08. WHY CHOOSE US
+   Four columns separated by hairlines (no cards, to keep it light)
+   ========================================================================== */
+.why { display: grid; gap: 2rem; }
+.why__item p { margin: 0; color: var(--text-muted); }
+
+@media (min-width: 640px) { .why { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; } }
+@media (min-width: 960px) {
+  .why { grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .why__item { padding-inline: 1.75rem; border-left: 1px solid var(--border); }
+  .why__item:first-child { padding-left: 0; border-left: 0; }
+  .why__item:last-child { padding-right: 0; }
+}
+
+
+/* ==========================================================================
+   09. DOCTORS
+   ========================================================================== */
+.doctor { padding: 0.75rem; }
+.doctor__photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  background: var(--secondary);
+}
+.doctor__body { padding: 1.1rem 0.5rem 0.6rem; }
+.doctor__body h3 { font-size: 1.15rem; margin-bottom: 0.15em; }
+.doctor__role { margin: 0 0 0.25em; color: var(--primary); font-weight: 500; font-size: 0.95rem; line-height: 1.45; }
+.doctor__qual { margin: 0; color: var(--text-muted); font-size: var(--fs-sm); }
+
+
+/* ==========================================================================
+   10. ABOUT & STATS
+   ========================================================================== */
+.about { display: grid; gap: 3rem; align-items: center; }
+.about__copy h3 { font-size: 1.1rem; margin: 1.75rem 0 0.35em; color: var(--primary); }
+.about__copy p { color: var(--text-muted); max-width: 36rem; margin-bottom: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.stat {
+  display: flex;
+  flex-direction: column-reverse;   /* number visually first, label second, but term stays first in DOM */
+  gap: 0.35rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.stat dt { color: var(--text-muted); font-size: var(--fs-sm); }
+.stat__num {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  line-height: 1.1;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 960px) {
+  .about { grid-template-columns: 1.1fr 0.9fr; gap: 5rem; }
+}
+
+
+/* ==========================================================================
+   11. BEFORE / AFTER GALLERY
+   ========================================================================== */
+.compare-card figcaption { margin-top: 0.9rem; color: var(--text-muted); font-size: 0.95rem; }
+
+.compare {
+  --pos: 50%;                         /* updated by script.js while sliding */
+  position: relative;
+  aspect-ratio: 15 / 8;
+  background: #F1C3C0;                /* soft "mouth" backdrop for the illustration */
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.compare__layer { position: absolute; inset: 0; display: grid; place-items: center; background: #F1C3C0; }
+.compare__layer .teeth {
+  width: 100%;
+  height: 100%;
+  fill: var(--tooth);                 /* inherited by the <use> shadow tree */
+  stroke: rgba(23, 43, 53, 0.18);
+  stroke-width: 1.5;
+}
+/* The "before" layer sits on top and is clipped to the left of the handle */
+.compare__before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+
+.compare__tag {
+  position: absolute;
+  top: 0.8rem;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  pointer-events: none;
+}
+.compare__tag--before { left: 0.8rem; }
+.compare__tag--after { right: 0.8rem; }
+
+.compare__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  background: #fff;
+  transform: translateX(-1px);
+  pointer-events: none;
+}
+.compare__handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  transform: translate(-50%, -50%);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23087E8B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7l-5 5 5 5M15 7l5 5-5 5'/%3E%3C/svg%3E") center / 1.4rem no-repeat;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(23, 43, 53, 0.2);
+}
+
+/* Invisible native range input = free keyboard, touch and screen-reader support */
+.compare input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  touch-action: pan-y;
+}
+.compare input[type="range"]::-webkit-slider-runnable-track { height: 100%; background: transparent; }
+.compare input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 100vh; }
+.compare input[type="range"]::-moz-range-track { height: 100%; background: transparent; }
+.compare input[type="range"]::-moz-range-thumb { width: 4px; height: 100%; border: 0; background: transparent; }
+.compare:focus-within { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+
+/*w
