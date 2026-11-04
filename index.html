@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--
+  [Hospital Name] — Dental Hospital Website
+  ------------------------------------------------------------
+  Files:  index.html  ·  style.css  ·  script.js
+  TO CUSTOMISE (use Find & Replace in your editor):
+    "[Hospital Name]"        → your hospital's name
+    "+1 (555) 012-3456"      → your display phone number
+    "+15550123456"           → your phone number for tel: links
+    "15550123456"            → your WhatsApp number (digits only, with country code)
+    "hello@hospitalname.com" → your email address
+    "www.example.com"        → your real domain (meta + Open Graph tags)
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Marks the page as "JS enabled" before first paint so reveal animations never flash -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- ===== SEO ===== -->
+  <title>[Hospital Name] | Gentle Dental Care, Implants &amp; Braces</title>
+  <meta name="description" content="[Hospital Name] offers gentle, modern dental care: cleanings, implants, braces, root canals, cosmetic and pediatric dentistry. Book your appointment online today.">
+  <meta name="theme-color" content="#087E8B">
+  <link rel="canonical" href="https://www.example.com/">
+
+  <!-- ===== Open Graph / Social sharing ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="[Hospital Name]">
+  <meta property="og:title" content="[Hospital Name] | Gentle Dental Care for the Whole Family">
+  <meta property="og:description" content="Modern dental treatment in a calm, welcoming setting. Book your visit online.">
+  <meta property="og:url" content="https://www.example.com/">
+  <meta property="og:image" content="https://www.example.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ===== Fonts: Poppins (headings) + Inter (body/UI) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ===== Structured data (helps Google show your clinic details) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "Pallavi Dental Clinic",
+    "url": "https://www.example.com/",
+    "telephone": "+15550123456",
+    "email": "hello@hospitalname.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Wellness Avenue, Suite 200",
+      "addressLocality": "Mumbai",
+      "addressRegion": "ST",
+      "postalCode": "00000"
+    },
+    "openingHours": ["Mo-Fr 08:00-19:00", "Sa 09:00-17:00"]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- =====================================================================
+       SVG ICON SPRITE
+       Every icon below is reused with: <svg class="icon"><use href="#i-name"/></svg>
+       Line icons share one style (stroke = currentColor) set in style.css.
+       ===================================================================== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+    <symbol id="i-tooth" viewBox="0 0 24 24"><path d="M7.5 3.500C5 3.500 3.600 5.500 3.800 8.100c.2 2.600 1.400 4.200 1.800 6.800.3 2 .6 5.600 2.300 5.600s1.500-4.200 3.700-4.200 2 4.200 3.700 4.200 2-3.600 2.300-5.600c.4-2.600 1.600-4.200 1.800-6.800.2-2.600-1.200-4.600-3.700-4.600-1.700 0-2.500 1-4 1s-2.300-1-4-1z"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3l1.800 5.200L18 10l-5.200 1.800L11 17l-1.800-5.200L4 10l5.200-1.800z"/><path d="M18.500 15l.8 2.200 2.200.8-2.200.8-.8 2.200-.8-2.200-2.200-.8 2.200-.8z"/></symbol>
+    <symbol id="i-implant" viewBox="0 0 24 24"><path d="M6.500 3.500h11V8a3.500 3.500 0 0 1-3.500 3.500h-4A3.500 3.500 0 0 1 6.500 8z"/><path d="M10 11.500v8.700l2 1.300 2-1.300v-8.700M10 14.500h4M10 17.500h4"/></symbol>
+    <symbol id="i-braces" viewBox="0 0 24 24"><path d="M2.500 12h19"/><rect x="4.500" y="8.500" width="4" height="7" rx="1.500"/><rect x="10" y="8.500" width="4" height="7" rx="1.500"/><rect x="15.500" y="8.500" width="4" height="7" rx="1.500"/></symbol>
+    <symbol id="i-root" viewBox="0 0 24 24"><path d="M7.500 3.500C5 3.500 3.600 5.500 3.800 8.100c.2 2.600 1.400 4.200 1.800 6.800.3 2 .6 5.600 2.300 5.600s1.500-4.200 3.700-4.200 2 4.200 3.700 4.200 2-3.600 2.300-5.600c.4-2.600 1.600-4.200 1.800-6.800.2-2.600-1.200-4.600-3.700-4.600-1.700 0-2.500 1-4 1s-2.300-1-4-1z"/><path d="M9.500 9.500l.7 6M14.500 9.500l-.7 6"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9.500 4L8 9l4 11 4-11-1.500-5"/></symbol>
+    <symbol id="i-child" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.500 14c.9 1.400 2 2.100 3.500 2.100s2.600-.7 3.500-2.100M9 9.500h.01M15 9.500h.01"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4.500" width="18" height="12" rx="2"/><path d="M8 20h8M12 16.500V20M6.500 11h3l1.500-2.500 2 5 1.500-2.500h3"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.400-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"/></symbol>
+    <symbol id="i-doctor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.500-6.500 8-6.500s8 2.500 8 6.500M12 16.500v3M10.500 18h3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.300 8-8 9-4.700-1-8-4.500-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.500" width="18" height="13" rx="2"/><path d="M3.500 7l8.500 6 8.500-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.200-7-11a7 7 0 0 1 14 0c0 4.800-7 11-7 11z"/><circle cx="12" cy="10" r="2.500"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9z" style="fill:currentColor"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.700 13.600L3 21l4.500-1.200A9 9 0 1 0 12 3z"/><path d="M9 8.500c0 3.500 3 6.500 6.500 6.500l1-1.500-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8h2.500V5H14a3.500 3.500 0 0 0-3.500 3.500V11H8v3h2.500v6h3v-6H16l.5-3h-3V8.500c0-.3.200-.5.500-.5z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.500"/><path d="M16.800 7.200h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M3 8.500a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/><path d="M10 9.500v5l4.500-2.500z"/></symbol>
+
+    <!-- Illustrated teeth used by the Before / After gallery (colour comes from --tooth) -->
+    <symbol id="teeth-straight" viewBox="0 0 300 160">
+      <rect x="26"  y="58" width="38" height="50" rx="16"/>
+      <rect x="68"  y="48" width="38" height="62" rx="16"/>
+      <rect x="110" y="42" width="38" height="68" rx="16"/>
+      <rect x="152" y="42" width="38" height="68" rx="16"/>
+      <rect x="194" y="48" width="38" height="62" rx="16"/>
+      <rect x="236" y="58" width="38" height="50" rx="16"/>
+    </symbol>
+    <symbol id="teeth-uneven" viewBox="0 0 300 160">
+      <rect x="26"  y="62" width="38" height="46" rx="16" transform="rotate(-6 45 85)"/>
+      <rect x="70"  y="50" width="36" height="58" rx="16" transform="rotate(5 88 80)"/>
+      <rect x="108" y="38" width="40" height="70" rx="16" transform="rotate(-4 128 73)"/>
+      <rect x="150" y="48" width="38" height="62" rx="16" transform="rotate(7 169 80)"/>
+      <rect x="192" y="40" width="40" height="68" rx="16" transform="rotate(-5 212 75)"/>
+      <rect x="236" y="60" width="38" height="48" rx="16" transform="rotate(6 255 84)"/>
+    </symbol>
+  </svg>
+
+  <!-- =====================================================================
+       1. STICKY NAVBAR
+       ===================================================================== -->
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="logo" href="#home" aria-label="[Hospital Name] — home">
+        <span class="logo__mark"><svg class="icon" aria-hidden="true"><use href="#i-tooth"/></svg></span>
+        <span class="logo__text">[Hospital Name]</span>
+      </a>
+
+      <nav id="primary-nav" class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#home">Home</a></li>
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#doctors">Doctors</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="#testimonials">Testimonials</a></li>
+          <li><a class="nav__link" href="#contact">Contact</a></li>
+          <!-- Shown only inside the mobile menu -->
+          <li class="nav__cta-mobile"><a class="btn btn--primary" href="#appointment">Book Appointment</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--primary header__cta" href="#appointment">Book Appointment</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =====================================================================
+         2. HERO
+         ===================================================================== -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1 id="hero-title">Gentle dental care for every smile in your family</h1>
+          <p class="lead">From routine cleanings to complete smile makeovers, our specialists treat you with comfort, clarity and care.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="#appointment">Book Appointment</a>
+            <a class="btn btn--ghost btn--lg" href="tel:+15550123456">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call Now
+            </a>
+          </div>
+
+          <!-- Trust badges -->
+          <ul class="trust" aria-label="Why patients trust us">
+            <li class="trust__item">
+              <span class="trust__icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <span><strong>15+ years</strong><small>of dental care</small></span>
+            </li>
+            <li class="trust__item">
+              <span class="trust__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+              <span><strong>12,000+</strong><small>happy patients</small></span>
+            </li>
+            <li class="trust__item">
+              <span class="trust__icon"><svg class="icon" aria-hidden="true"><use href="#i-doctor"/></svg></span>
+              <span><strong>20 specialists</strong><small>under one roof</small></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Hero visual: one line-drawn tooth that draws itself on load -->
+        <div class="hero__visual" aria-hidden="true">
+          <svg class="hero__tooth" viewBox="0 0 120 160" fill="none">
+            <path class="hero__tooth-path" pathLength="1"
+              d="M30 20C14 20 6 34 8 52c2 18 10 32 12 52 2 20 4 42 14 42s10-34 26-34 16 34 26 34 12-22 14-42c2-20 10-34 12-52 2-18-6-32-22-32-12 0-18 8-30 8S42 20 30 20z"/>
+            <path class="hero__tooth-shine" d="M26 38c-4 4-5 10-4 16"/>
+          </svg>
+          <div class="hero__chip hero__chip--top">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            <span><strong>Next free slot</strong><small>Today, 4:30 PM</small></span>
+          </div>
+          <div class="hero__chip hero__chip--bottom">
+            <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+            <span><strong>4.9 rating</strong><small>2,400+ patient reviews</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. SERVICES
+         ===================================================================== -->
+    <section class="section section--tint" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <h2 id="services-title">Treatments for every stage of your smile</h2>
+          <p>Complete dental care in one place, from prevention to restoration.</p>
+        </header>
+
+        <div class="grid grid--3" data-stagger>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+            <h3>Teeth Cleaning</h3>
+            <p>Professional scaling and polishing that removes plaque and keeps your gums healthy.</p>
+          </article>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-implant"/></svg></span>
+            <h3>Dental Implants</h3>
+            <p>Natural-looking replacements that restore your bite, speech and confidence.</p>
+          </article>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-braces"/></svg></span>
+            <h3>Orthodontics &amp; Braces</h3>
+            <p>Metal, ceramic and clear aligners to straighten teeth at any age.</p>
+          </article>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-root"/></svg></span>
+            <h3>Root Canal</h3>
+            <p>Gentle treatment that relieves pain and saves your natural tooth.</p>
+          </article>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-gem"/></svg></span>
+            <h3>Cosmetic Dentistry</h3>
+            <p>Whitening, veneers and smile design tailored to your face.</p>
+          </article>
+          <article class="card service">
+            <span class="icon-box"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-child"/></svg></span>
+            <h3>Pediatric Dentistry</h3>
+            <p>Friendly, patient care that helps children feel at ease in the chair.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. WHY CHOOSE US
+         ===================================================================== -->
+    <section class="section" id="why-us" aria-labelledby="why-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <h2 id="why-title">Why patients choose Pallavi Dental Clinic</h2>
+          <p>Comfort and safety come first, in every appointment.</p>
+        </header>
+
+        <div class="why" data-stagger>
+          <div class="why__item">
+            <span class="icon-box icon-box--round"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-monitor"/></svg></span>
+            <h3>Modern equipment</h3>
+            <p>Digital X-rays, 3D scanning and laser tools for accurate, comfortable care.</p>
+          </div>
+          <div class="why__item">
+            <span class="icon-box icon-box--round"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-heart"/></svg></span>
+            <h3>Painless treatment</h3>
+            <p>Gentle techniques and effective anesthesia keep you relaxed throughout.</p>
+          </div>
+          <div class="why__item">
+            <span class="icon-box icon-box--round"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-doctor"/></svg></span>
+            <h3>Expert doctors</h3>
+            <p>Experienced specialists in every dental field, working together under one roof.</p>
+          </div>
+          <div class="why__item">
+            <span class="icon-box icon-box--round"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h3>Hygiene and safety</h3>
+            <p>Hospital-grade sterilization and single-use items for every patient.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. DOCTORS
+         Replace each placeholder <img src="…"> with a real photo (400×500 works well).
+         ===================================================================== -->
+    <section class="section section--tint" id="doctors" aria-labelledby="doctors-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <h2 id="doctors-title">Meet your care team</h2>
+          <p>Friendly specialists who take the time to explain every step.</p>
+        </header>
+
+        <div class="grid grid--4" data-stagger>
+          <article class="card doctor">
+            <img class="doctor__photo" loading="lazy" decoding="async" width="400" height="500"
+                 alt="Portrait placeholder of Dr. Pallavi Singh"
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23EAF8FA'/%3E%3Ccircle cx='200' cy='190' r='62' fill='%23C5E6EB'/%3E%3Cpath d='M70 500c0-95 58-150 130-150s130 55 130 150z' fill='%23C5E6EB'/%3E%3C/svg%3E">
+            <div class="doctor__body">
+              <h3>Dr. Pallavi Singh</h3>
+              <p class="doctor__role">Implantologist &amp; Chief of Dentistry</p>
+              <p class="doctor__qual">BDS, MDS (Prosthodontics)</p>
+            </div>
+          </article>
+          <article class="card doctor">
+            <img class="doctor__photo" loading="lazy" decoding="async" width="400" height="500"
+                 alt="Portrait placeholder of Dr. Daniel Chen"
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23EAF8FA'/%3E%3Ccircle cx='200' cy='190' r='62' fill='%23C5E6EB'/%3E%3Cpath d='M70 500c0-95 58-150 130-150s130 55 130 150z' fill='%23C5E6EB'/%3E%3C/svg%3E">
+            <div class="doctor__body">
+              <h3>Dr. Daniel Chen</h3>
+              <p class="doctor__role">Orthodontist</p>
+              <p class="doctor__qual">BDS, MDS (Orthodontics)</p>
+            </div>
+          </article>
+          <article class="card doctor">
+            <img class="doctor__photo" loading="lazy" decoding="async" width="400" height="500"
+                 alt="Portrait placeholder of Dr. Priya Nair"
+                 src="data:image/svg+xml,
